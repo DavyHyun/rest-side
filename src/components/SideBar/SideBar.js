@@ -4,13 +4,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HistoryIcon from '@mui/icons-material/History';
-import MailIcon from '@mui/icons-material/Mail';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { Link } from 'react-router-dom';
-import { lineHeight } from '@mui/system';
 
 function SideBar() {
 
