@@ -1,0 +1,11 @@
+@import "../../styles/variables.scss";
+
+.header {
+    z-index: 99999999;
+    background: blue;
+    position: sticky;
+    top: 0;
+    width: $sidebarWidth;
+    height:100vh;
+    padding: 0 1.5rem;
+}

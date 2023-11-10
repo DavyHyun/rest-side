@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Outfit:wght@100;200;300;400;500;600;700;800&family=El+Messiri&display=swap');
+
+
+// fonts
+$Outfit: 'Outfit', sans-serif;
+$Abril: 'Abril Fatface', cursive;
+$basicFont: 'El Messiri', sans-serif;
+
+// colors 
+$dark: rgb(29, 29, 29);
+$light: #fff;
+$primary: #B8293D;
+$text: #000000;
+$accent: #B8293D;
+$line: #B8293D;
+$price: #E45A5A;
+$menuUnselected: #B9B9B9;
+
+// spacing
+$spacing-md: 16px;
+$spacing-lg: 32px;
+
+//border radius
+$borderRadius: 12px;
+
+// header height
+$sidebarWidth: 300px;
+$lgHeaderHeight: 320px;
+
+@mixin breakpoint($point) {
+    @if $point == md {
+        @media (min-width: 48em) {
+            @content
+        }
+    }
+}
+
