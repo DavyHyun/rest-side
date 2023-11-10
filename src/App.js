@@ -9,8 +9,6 @@ import Settings from "./pages/Settings/Settings";
 
 function App() {
 
-    // all colors will be set in variable.scss as secondary, primary, text, etc..
-    // never use individual colors in css file
 
     return (
         <Layout>
