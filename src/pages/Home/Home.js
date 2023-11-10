@@ -1,5 +1,6 @@
 import React from 'react'
-
+import classes from "./Home.module.scss";
+import OrderCard from '../../components/OrderCard/OrderCard';
 
 const fakeOrders = [
     {
@@ -17,7 +18,22 @@ const fakeOrders = [
                 inst: '',
                 qty: 2,
                 cost: 13.50
-            }
+            },
+            {
+                name: 'Gyoza Plate (10pcs)',
+                options: [],
+                inst: '',
+                qty: 2,
+                cost: 13.50
+            },
+            {
+                name: 'Chicken Veggie',
+                options: ['Extra Chicken', 'Spicy Chicken'],
+                inst: 'no pepper please',
+                qty: 1,
+                cost: 13.50,
+            },
+
         ],
         total: 26.49,
     },
@@ -95,7 +111,7 @@ const fakeOrders = [
                 cost: 13.50
             }
         ],
-        total: 26.49,
+        total: 26.50,
     },
     {
         items: [
@@ -119,7 +135,26 @@ const fakeOrders = [
 ]
 function Home() {
   return (
-    <div>Home</div>
+    <div className={classes.container}>
+        <p1 style={{
+            width: '92.5%',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            fontWeight: 'bold',
+            fontSize: '20px',
+            marginTop: '3%',
+            marginBottom: '1%'
+        }}>HOME - ORDER LIST</p1>
+        <div className={classes.orderContainer}>
+            {
+                fakeOrders.map((order, index) => {
+                    return (
+                        <OrderCard order={order} index={index + 1} />
+                    )
+                })
+            }
+        </div>
+    </div>
   )
 }
 

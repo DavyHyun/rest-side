@@ -5,7 +5,7 @@ import classes from "./Layout.module.scss";
 
 function Layout({ children }) {
   return (
-    <div style={{display: 'flex', backgroundColor: '#F3F3F3', height: '100vh'}}>
+    <div style={{display: 'flex', backgroundColor: '#F3F3F3'}}>
         <SideBar />
         <div className={classes.container}>{children}</div>
     </div>     
