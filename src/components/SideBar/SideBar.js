@@ -34,31 +34,31 @@ function SideBar() {
        }}>{RESTNAME}</p>
     <List>
       <ListItem button component={Link} to="/">
-        <ListItemIcon>
+        <ListItemIcon style={{color: '#B8293D'}}>
           <HomeOutlinedIcon />
         </ListItemIcon>
         Home
       </ListItem>
       <ListItem button component={Link} to="/cleared">
-        <ListItemIcon>
+        <ListItemIcon style={{color: '#B8293D'}}>
           <HistoryIcon />
         </ListItemIcon>
         Cleared Orders
       </ListItem>
       <ListItem button component={Link} to="/history">
-        <ListItemIcon>
+        <ListItemIcon style={{color: '#B8293D'}}>
           <AttachMoneyOutlinedIcon />
         </ListItemIcon>
         Transaction History
       </ListItem>
       <ListItem button component={Link} to="/products">
-        <ListItemIcon>
+        <ListItemIcon style={{color: '#B8293D'}}>
           <ShoppingCartOutlinedIcon />
         </ListItemIcon>
         Products
       </ListItem>
       <ListItem button component={Link} to="/settings">
-        <ListItemIcon>
+        <ListItemIcon style={{color: '#B8293D'}}>
           <SettingsOutlinedIcon />
         </ListItemIcon>
         Settings

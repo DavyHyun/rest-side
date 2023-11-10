@@ -14,8 +14,6 @@ function App() {
 
     return (
         <Layout>
-            {/* Global state will go here (JSON)
-            https://stackoverflow.com/questions/69675357/what-is-the-proper-way-to-do-global-state */}
             <Routes>
                 <Route path="/" exact element={<Home />} />
                 <Route path="/cleared" exact element={<Cleared />} />
