@@ -6,7 +6,6 @@ import classes from './Settings.module.scss';
 import isEqual from 'lodash/isEqual';
 
 function Settings() {
-  // State variables for the restaurant data and individual fields
   const [restaurantData, setRestaurantData] = useState(null);
   const [newRestName, setNewRestName] = useState('');
   const [newAddress, setNewAddress] = useState('');
@@ -15,7 +14,6 @@ function Settings() {
   const [newHours, setNewHours] = useState('');
   const [newPhoneNumber, setNewPhoneNumber] = useState('');
 
-  // State variables for the editing state of individual fields
   const [isEditingRestName, setIsEditingRestName] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [isEditingBodyText, setIsEditingBodyText] = useState(false);
@@ -23,7 +21,6 @@ function Settings() {
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [isEditingPhoneNumber, setIsEditingPhoneNumber] = useState(false);
 
-  // Fetching initial restaurant data on component mount
   useEffect(() => {
     const restaurantsRef = ref(database, 'restaurants');
   
@@ -42,7 +39,6 @@ function Settings() {
         setNewHours(firstRestaurant.hours);
         setNewPhoneNumber(firstRestaurant.phoneNumber);
 
-        // Resetting editing states when data changes
         setIsEditingRestName(false);
         setIsEditingAddress(false);
         setIsEditingBodyText(false);
@@ -55,7 +51,6 @@ function Settings() {
     return () => unsubscribe();
   }, [restaurantData]);
 
-  // Event handlers for changing values of individual fields
   const handleRestNameChange = (event) => {
     setNewRestName(event.target.value);
   };
@@ -80,7 +75,6 @@ function Settings() {
     setNewPhoneNumber(event.target.value);
   };
 
-  // Event handlers for initiating the edit state of individual fields
   const handleEditRestNameClick = () => {
     setIsEditingRestName(true);
   };
@@ -105,26 +99,22 @@ function Settings() {
     setIsEditingPhoneNumber(true);
   };
 
-  // Event handlers for saving changes to individual fields
   const handleSaveRestNameClick = () => {
     const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
   
     if (newRestName !== restaurantData.RESTNAME) {
       update(restaurantRef, { RESTNAME: newRestName })
         .then(() => {
-          // Update local state after successful Firebase update
           setRestaurantData((prevData) => ({
             ...prevData,
             RESTNAME: newRestName,
           }));
-          // Resetting editing state after saving
           setIsEditingRestName(false);
         })
         .catch((error) => {
           console.error('Error updating restaurant name:', error);
         });
     } else {
-      // Resetting editing state if the name is not changed
       setIsEditingRestName(false);
     }
   };
