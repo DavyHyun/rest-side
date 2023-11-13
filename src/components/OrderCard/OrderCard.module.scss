@@ -1,0 +1,70 @@
+@import "../../styles/variables.scss";
+
+.container {
+    display: flex;
+    width: 350px;
+    height: 400px;
+    background-color: white;
+    margin: 15px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.orderText {
+    font-weight:500;
+    font-size: 17px;
+    text-align: left;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.orderContainer {
+    width: 90%;
+    height: 210px;
+    overflow-y: scroll;
+}
+
+.bottomContainer {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 15%;
+}
+
+.totalContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    >p1 {
+        font-size: 13px;
+        font-weight: 100;
+    }
+}
+
+.checkButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-color: #43A047;
+    background-color: #DCEFDB;
+    border-width: 1.2px;
+    border-radius: 5px;
+    border-style: solid;
+    margin-right: 2%;
+
+    >p1 {
+        color: #43A047;
+        font-size: 25px;
+    }
+}
+
+.checkButton:hover {
+    cursor:pointer;
+    transform: scale(1.05);
+}
