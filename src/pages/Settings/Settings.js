@@ -13,6 +13,13 @@ function Settings() {
   const [newHeaderText, setNewHeaderText] = useState('');
   const [newHours, setNewHours] = useState('');
   const [newPhoneNumber, setNewPhoneNumber] = useState('');
+  const [newMon, setNewMon] = useState('');
+  const [newTue, setNewTue] = useState('');
+  const [newWed, setNewWed] = useState('');
+  const [newThur, setNewThur] = useState('');
+  const [newFri, setNewFri] = useState('');
+  const [newSat, setNewSat] = useState('');
+  const [newSun, setNewSun] = useState('');
 
   const [isEditingRestName, setIsEditingRestName] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -20,6 +27,13 @@ function Settings() {
   const [isEditingHeaderText, setIsEditingHeaderText] = useState(false);
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [isEditingPhoneNumber, setIsEditingPhoneNumber] = useState(false);
+  const [isEditingMon, setIsEditingMon] = useState(false);
+  const [isEditingTue, setIsEditingTue] = useState(false);
+  const [isEditingWed, setIsEditingWed] = useState(false);
+  const [isEditingThur, setIsEditingThur] = useState(false);
+  const [isEditingFri, setIsEditingFri] = useState(false);
+  const [isEditingSat, setIsEditingSat] = useState(false);
+  const [isEditingSun, setIsEditingSun] = useState(false);
 
   useEffect(() => {
     const restaurantsRef = ref(database, 'restaurants');
@@ -38,6 +52,13 @@ function Settings() {
         setNewHeaderText(firstRestaurant.headerText);
         setNewHours(firstRestaurant.hours);
         setNewPhoneNumber(firstRestaurant.phoneNumber);
+        setNewMon(firstRestaurant.Mon);
+        setNewTue(firstRestaurant.Tue);
+        setNewWed(firstRestaurant.Wed);
+        setNewThur(firstRestaurant.Thur);
+        setNewFri(firstRestaurant.Fri);
+        setNewSat(firstRestaurant.Sat);
+        setNewSun(firstRestaurant.Sun);
 
         setIsEditingRestName(false);
         setIsEditingAddress(false);
@@ -45,6 +66,13 @@ function Settings() {
         setIsEditingHeaderText(false);
         setIsEditingHours(false);
         setIsEditingPhoneNumber(false);
+        setIsEditingMon(false);
+        setIsEditingTue(false);
+        setIsEditingWed(false);
+        setIsEditingThur(false);
+        setIsEditingFri(false);
+        setIsEditingSat(false);
+        setIsEditingSun(false);
       }
     });
   
@@ -75,6 +103,34 @@ function Settings() {
     setNewPhoneNumber(event.target.value);
   };
 
+  const handleMonChange = (event) => {
+    setNewMon(event.target.value);
+  };
+
+  const handleTueChange = (event) => {
+    setNewTue(event.target.value);
+  };
+
+  const handleWedChange = (event) => {
+    setNewWed(event.target.value);
+  };
+
+  const handleThurChange = (event) => {
+    setNewThur(event.target.value);
+  };
+
+  const handleFriChange = (event) => {
+    setNewFri(event.target.value);
+  };
+
+  const handleSatChange = (event) => {
+    setNewSat(event.target.value);
+  };
+
+  const handleSunChange = (event) => {
+    setNewSun(event.target.value);
+  };
+
   const handleEditRestNameClick = () => {
     setIsEditingRestName(true);
   };
@@ -97,6 +153,34 @@ function Settings() {
 
   const handleEditPhoneNumberClick = () => {
     setIsEditingPhoneNumber(true);
+  };
+
+  const handleEditMonClick = () => {
+    setIsEditingMon(true);
+  };
+
+  const handleEditTueClick = () => {
+    setIsEditingTue(true);
+  };  
+
+  const handleEditWedClick = () => {
+    setIsEditingWed(true);
+  };
+
+  const handleEditThurClick = () => {
+    setIsEditingThur(true);
+  };
+
+  const handleEditFriClick = () => {
+    setIsEditingFri(true);
+  };
+
+  const handleEditSatClick = () => {
+    setIsEditingSat(true);
+  };
+
+  const handleEditSunClick = () => {
+    setIsEditingSun(true);
   };
 
   const handleSaveRestNameClick = () => {
@@ -219,6 +303,146 @@ function Settings() {
     }
   };
 
+  const handleMonClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newMon !== restaurantData.Mon) {
+      update(restaurantRef, { Mon: newMon })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Mon: newMon,
+          }));
+          setIsEditingMon(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Mon:', error);
+        });
+    } else {
+      setIsEditingMon(false);
+    }
+  };
+
+  const handleTueClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newTue !== restaurantData.Tue) {
+      update(restaurantRef, { Tue: newTue })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Tue: newTue,
+          }));
+          setIsEditingTue(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Tue:', error);
+        });
+    } else {
+      setIsEditingTue(false);
+    }
+  };
+
+  const handleWedClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newWed !== restaurantData.Wed) {
+      update(restaurantRef, { Wed: newWed })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Wed: newWed,
+          }));
+          setIsEditingWed(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Wed:', error);
+        });
+    } else {
+      setIsEditingWed(false);
+    }
+  };
+
+  const handleThurClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newThur !== restaurantData.Thur) {
+      update(restaurantRef, { Thur: newThur })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Thur: newThur,
+          }));
+          setIsEditingThur(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Thur:', error);
+        });
+    } else {
+      setIsEditingThur(false);
+    }
+  };
+
+  const handleFriClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newFri !== restaurantData.Fri) {
+      update(restaurantRef, { Fri: newFri })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Fri: newFri,
+          }));
+          setIsEditingFri(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Fri:', error);
+        });
+    } else {
+      setIsEditingFri(false);
+    }
+  };
+
+  const handleSatClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newSat !== restaurantData.Sat) {
+      update(restaurantRef, { Sat: newSat })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Sat: newSat,
+          }));
+          setIsEditingSat(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Sat', error);
+        });
+    } else {
+      setIsEditingSat(false);
+    }
+  };
+
+  const handleSunClick = () => {
+    const restaurantRef = ref(database, `restaurants/-Nj2D9YEjyq1iyZM6aSQ`);
+  
+    if (newSun !== restaurantData.Sun) {
+      update(restaurantRef, { Sun: newSun })
+        .then(() => {
+          setRestaurantData((prevData) => ({
+            ...prevData,
+            Sun: newSun,
+          }));
+          setIsEditingSun(false);
+        })
+        .catch((error) => {
+          console.error('Error updating Sun', error);
+        });
+    } else {
+      setIsEditingSun(false);
+    }
+  };
+
   return (
     <div className={classes.container}>
       <p1 style={{
@@ -234,7 +458,7 @@ function Settings() {
       {restaurantData && (
         <div className={classes.restaurantDataContainer}>
           <p className={classes.dataItem}>
-            <span className={classes.boldLabel}>Restaurant Name:</span> 
+            <span className={classes.boldLabel}>Restaurant Name: </span> 
             {isEditingRestName ? (
               <input type="text" value={newRestName} onChange={handleRestNameChange} />
             ) : (
@@ -248,7 +472,7 @@ function Settings() {
           </p>
 
           <p className={classes.dataItem}>
-            <span className={classes.boldLabel}>Address:</span>
+            <span className={classes.boldLabel}>Address: </span>
             {isEditingAddress ? (
               <input type="text" value={newAddress} onChange={handleAddressChange} />
             ) : (
@@ -262,7 +486,7 @@ function Settings() {
           </p>
 
           <p className={classes.dataItem}>
-            <span className={classes.boldLabel}>Body Text:</span>
+            <span className={classes.boldLabel}>Body Text: </span>
             {isEditingBodyText ? (
               <input type="text" value={newBodyText} onChange={handleBodyTextChange} />
             ) : (
@@ -276,7 +500,7 @@ function Settings() {
           </p>
 
           <p className={classes.dataItem}>
-            <span className={classes.boldLabel}>Header Text:</span>
+            <span className={classes.boldLabel}>Header Text: </span>
             {isEditingHeaderText ? (
               <input type="text" value={newHeaderText} onChange={handleHeaderTextChange} />
             ) : (
@@ -290,21 +514,105 @@ function Settings() {
           </p>
 
           <p className={classes.dataItem}>
-            <span className={classes.boldLabel}>Hours:</span>
-            {isEditingHours ? (
-              <input type="text" value={newHours} onChange={handleHoursChange} />
+            <span className={classes.boldLabel}>Monday Hours: </span>
+            {isEditingMon ? (
+              <input type="text" value={newMon} onChange={handleMonChange} />
             ) : (
-              <span>{restaurantData.hours}</span>
+              <span>{restaurantData.Mon}</span>
             )}
-            {isEditingHours ? (
-              <button onClick={handleSaveHoursClick}>Save</button>
+            {isEditingMon ? (
+              <button onClick={handleMonClick}>Save</button>
             ) : (
-              <button onClick={handleEditHoursClick}>Edit</button>
+              <button onClick={handleEditMonClick}>Edit</button>
             )}
           </p>
 
           <p className={classes.dataItem}>
-            <span className={classes.boldLabel}>Phone Number:</span>
+            <span className={classes.boldLabel}>Tuesday Hours: </span>
+            {isEditingTue ? (
+              <input type="text" value={newTue} onChange={handleTueChange} />
+            ) : (
+              <span>{restaurantData.Tue}</span>
+            )}
+            {isEditingTue ? (
+              <button onClick={handleTueClick}>Save</button>
+            ) : (
+              <button onClick={handleEditTueClick}>Edit</button>
+            )}
+          </p>
+
+          <p className={classes.dataItem}>
+            <span className={classes.boldLabel}>Wednesday Hours: </span>
+            {isEditingWed ? (
+              <input type="text" value={newWed} onChange={handleWedChange} />
+            ) : (
+              <span>{restaurantData.Wed}</span>
+            )}
+            {isEditingWed ? (
+              <button onClick={handleWedClick}>Save</button>
+            ) : (
+              <button onClick={handleEditWedClick}>Edit</button>
+            )}
+          </p>
+
+          <p className={classes.dataItem}>
+            <span className={classes.boldLabel}>Thursday Hours: </span>
+            {isEditingThur ? (
+              <input type="text" value={newThur} onChange={handleThurChange} />
+            ) : (
+              <span>{restaurantData.Thur}</span>
+            )}
+            {isEditingThur ? (
+              <button onClick={handleThurClick}>Save</button>
+            ) : (
+              <button onClick={handleEditThurClick}>Edit</button>
+            )}
+          </p>
+
+          <p className={classes.dataItem}>
+            <span className={classes.boldLabel}>Friday Hours: </span>
+            {isEditingFri ? (
+              <input type="text" value={newFri} onChange={handleFriChange} />
+            ) : (
+              <span>{restaurantData.Fri}</span>
+            )}
+            {isEditingFri ? (
+              <button onClick={handleFriClick}>Save</button>
+            ) : (
+              <button onClick={handleEditFriClick}>Edit</button>
+            )}
+          </p>
+
+          <p className={classes.dataItem}>
+            <span className={classes.boldLabel}>Saturday Hours: </span>
+            {isEditingSat ? (
+              <input type="text" value={newSat} onChange={handleSatChange} />
+            ) : (
+              <span>{restaurantData.Sat}</span>
+            )}
+            {isEditingSat ? (
+              <button onClick={handleSatClick}>Save</button>
+            ) : (
+              <button onClick={handleEditSatClick}>Edit</button>
+            )}
+          </p>
+
+          <p className={classes.dataItem}>
+            <span className={classes.boldLabel}>Sunday Hours: </span>
+            {isEditingSun ? (
+              <input type="text" value={newSun} onChange={handleSunChange} />
+            ) : (
+              <span>{restaurantData.Sun}</span>
+            )}
+            {isEditingSun ? (
+              <button onClick={handleSunClick}>Save</button>
+            ) : (
+              <button onClick={handleEditSunClick}>Edit</button>
+            )}
+          </p>
+
+          <p className={classes.dataItem}>
+            <span className={classes.boldLabel}>Phone Number: </span>
             {isEditingPhoneNumber ? (
               <input type="text" value={newPhoneNumber} onChange={handlePhoneNumberChange} />
             ) : (
