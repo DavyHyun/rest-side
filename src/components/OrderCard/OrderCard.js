@@ -11,7 +11,7 @@ function OrderCard(props) {
         <p className={classes.orderText}>ORDER #{key}</p>
         <div className={classes.orderContainer}>
             {
-                order.items.map((item, i) => {
+                order.order.map((item, i) => {
                     return (
                         <OrderView item={item} i={i}/>
                     )
@@ -20,7 +20,7 @@ function OrderCard(props) {
         </div>
         <div className={classes.bottomContainer}>
             <div className={classes.totalContainer}>
-                <p1>x{order.items.length} Items</p1>
+                <p1>x{order.order.length} Items</p1>
                 <p2>${order.total.toFixed(2)}</p2>
             </div>
 

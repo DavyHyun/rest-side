@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import classes from "./Home.module.scss";
 import OrderCard from '../../components/OrderCard/OrderCard';
-import io from 'socket.io-client'
+import { get, ref, onValue, update } from 'firebase/database';
+import {database} from '../../firebase'; 
 
 const fakeOrders = [
   {
@@ -136,6 +137,23 @@ const fakeOrders = [
 ]
 function Home() {
 
+    const [orders, setOrders] = useState([]);
+
+    useEffect(() => {
+        const orderRef = ref(database, 'restaurants/-Nj2D9YEjyq1iyZM6aSQ/orders');
+
+        onValue(orderRef, (snapshot) => {
+            const data = snapshot.val();
+            console.log(Object.values(data));
+            setOrders(Object.values(data));
+        })
+
+        return () => {
+            onValue(orderRef, () => {});
+        }
+
+    },[])
+
   return (
     <div className={classes.container}>
       <p1 style={{
@@ -149,7 +167,7 @@ function Home() {
       }}>HOME - ORDER LIST</p1>
       <div className={classes.orderContainer}>
         {
-          fakeOrders.map((order, index) => {
+          orders.map((order, index) => {
             return (
               <OrderCard order={order} index={index + 1} />
             )

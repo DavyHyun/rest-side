@@ -118,28 +118,35 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
                 }
               }
               i = j;
-              items.push({
-                name: currItem.description,
-                options: currItemOptions,
-                qty: currItem.quantity,
-                cost: currItem.amount_total / 100,
-                inst: checkoutSessionCompleted.metadata[currItem.price.product],
-              })
+              if ( checkoutSessionCompleted.metadata[currItem.price.product] === undefined) {
+                items.push({
+                  name: currItem.description,
+                  options: currItemOptions,
+                  qty: currItem.quantity,
+                  cost: currItem.amount_total / 100,
+                  inst: '',
+                })
+              } else {
+                items.push({
+                  name: currItem.description,
+                  options: currItemOptions,
+                  qty: currItem.quantity,
+                  cost: currItem.amount_total / 100,
+                  inst: checkoutSessionCompleted.metadata[currItem.price.product],
+                })
+              }
+            
             } else {
               i++;
             }
           }
           console.log("ITEMS")
           const ref = db.ref('/restaurants/-Nj2D9YEjyq1iyZM6aSQ/orders')
-          for (let i = 0; i < items.length; i++) {
-            console.log(items[i]);
-            const newChildRef = ref.push(items[i]);
-            console.log('Data pushed to:', newChildRef.key);
-          
-          }
-
-
-
+          const newChildRef = ref.push({
+            order: items,
+            total: checkoutSessionCompleted.amount_total / 100,
+          });
+          console.log('Data pushed to:', newChildRef.key);
         }
       )
     
