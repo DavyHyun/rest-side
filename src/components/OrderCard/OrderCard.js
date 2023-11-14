@@ -5,6 +5,11 @@ function OrderCard(props) {
 
     const order = props.order;
     const key = props.index;
+    const cleared = props.cleared
+
+    const handleClick = () => {
+        props.removeOrder(key);
+    }
 
   return (
     <div className={classes.container}>
@@ -24,8 +29,8 @@ function OrderCard(props) {
                 <p2>${order.total.toFixed(2)}</p2>
             </div>
 
-            <div className={classes.checkButton}>
-                <p1>✓</p1>
+            <div className={cleared ? classes.checkButtonRestore: classes.checkButton} onClick={handleClick}>
+                {cleared ? <p1>↻</p1> : <p1>✓</p1>}
             </div>
         </div>
     </div>

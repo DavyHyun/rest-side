@@ -1,158 +1,67 @@
 import React, { useEffect, useState } from 'react'
 import classes from "./Home.module.scss";
 import OrderCard from '../../components/OrderCard/OrderCard';
-import { get, ref, onValue, update } from 'firebase/database';
+import { get, ref, onValue, update, remove, child, push } from 'firebase/database';
 import {database} from '../../firebase'; 
 
-const fakeOrders = [
-  {
-    items: [
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 2,
-        cost: 13.50
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 2,
-        cost: 13.50
-      },
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-
-    ],
-    total: 26.49,
-  },
-  {
-    items: [
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 3,
-        cost: 13.50
-      }
-    ],
-    total: 26.49,
-  },
-  {
-    items: [
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 4,
-        cost: 13.50
-      }
-    ],
-    total: 26.49,
-  },
-  {
-    items: [
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 5,
-        cost: 13.50
-      }
-    ],
-    total: 26.49,
-  },
-  {
-    items: [
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 6,
-        cost: 13.50
-      }
-    ],
-    total: 26.50,
-  },
-  {
-    items: [
-      {
-        name: 'Chicken Veggie',
-        options: ['Extra Chicken', 'Spicy Chicken'],
-        inst: 'no pepper please',
-        qty: 1,
-        cost: 13.50,
-      },
-      {
-        name: 'Gyoza Plate (10pcs)',
-        options: [],
-        inst: '',
-        qty: 7,
-        cost: 13.50
-      }
-    ],
-    total: 26.49,
-  }
-]
 function Home() {
 
     const [orders, setOrders] = useState([]);
+    const [keys, setKeys] = useState([]);
 
     useEffect(() => {
         const orderRef = ref(database, 'restaurants/-Nj2D9YEjyq1iyZM6aSQ/orders');
 
-        onValue(orderRef, (snapshot) => {
-            const data = snapshot.val();
-            console.log(Object.values(data));
-            setOrders(Object.values(data));
-        })
+        try {
+            onValue(orderRef, (snapshot) => {
+                if (!snapshot.exists()) {
+                    setKeys([]);
+                    setOrders([]);
+                } else {
+                    const data = snapshot.val();
+                    if (data === null) {
+                        setKeys([]);
+                        setOrders([]);
+                    } else {
+                        setKeys(Object.keys(data));
+                        setOrders(Object.values(data));
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+            // Handle the error gracefully, e.g., set state to default values
+            setKeys([]);
+            setOrders([]);
+        }
+        
 
         return () => {
             onValue(orderRef, () => {});
         }
 
     },[])
+
+    const removeOrder = (prop) => {
+        const orderRef = ref(database, 'restaurants/-Nj2D9YEjyq1iyZM6aSQ/orders');
+        const idToRemove = keys[prop - 1];
+
+        remove(child(orderRef, idToRemove))
+            .then(() => {
+                console.log(`Order with ID ${idToRemove} removed successfully.`);
+            })
+            .catch((error) => {
+                console.error(`Error removing order: ${error.message}`);
+            });
+
+        const clearedRef = ref(database, 'restaurants/-Nj2D9YEjyq1iyZM6aSQ/cleared');
+        const objToAdd = orders[prop - 1];
+
+        const added = push(clearedRef, objToAdd);
+        console.log("ITEM ADDED TO CLEAR");
+
+
+    }
 
   return (
     <div className={classes.container}>
@@ -169,7 +78,7 @@ function Home() {
         {
           orders.map((order, index) => {
             return (
-              <OrderCard order={order} index={index + 1} />
+              <OrderCard order={order} index={index + 1} removeOrder={(prop) => removeOrder(prop)} cleared={false}/>
             )
           })
         }

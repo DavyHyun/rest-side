@@ -64,6 +64,30 @@
     }
 }
 
+.checkButtonRestore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-color: #D3D563;
+    background-color: #FCFDCF;
+    border-width: 1.2px;
+    border-radius: 5px;
+    border-style: solid;
+    margin-right: 2%;
+
+    >p1 {
+        color: #D3D563;
+        font-size: 25px;
+    }
+}
+
+.checkButtonRestore:hover {
+    cursor:pointer;
+    transform: scale(1.05);
+}
+
 .checkButton:hover {
     cursor:pointer;
     transform: scale(1.05);
