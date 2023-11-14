@@ -11,7 +11,6 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [prices, setPrices] = useState([]);
 
-
   // retrieve products and prices
   useEffect(() => {
     window.dispatchEvent(new Event('storage')) // trigger update to header

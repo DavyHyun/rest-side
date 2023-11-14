@@ -6,9 +6,6 @@ var cors = require("cors");
 const stripe = require('stripe')('sk_test_51LPzSaAmJKzU86rcPkixEgsmzCDCKkeSKE9JiRstspOC4RbvaJm3qHlm3NqrBFWhcRiFg2hoDSCqQE879PbAJhHN00W0ePS1ZA')
 var bodyParser = require('body-parser')
 
-
-
-app.use(bodyParser.json());
 app.use(cors());
 
 // This displays message that the server runode nning and listening to specified port
@@ -21,8 +18,6 @@ app.get('/products', (req, res) => {
       result.data[i].key = i;
       result.data[i].quantity = 0;
     }
-    console.log("length: " + result.data.length)
-    console.log(result.data)
     res.json({ products: result.data })
   });
 });
@@ -36,7 +31,7 @@ app.get('/prices', (req, res) => {
 const getPrice = async () => {
   return new Promise(function (resolve, reject) {
     const price = stripe.prices.list({
-      limit: 10,
+      limit: 100,
     });
     resolve(price);
   })
@@ -44,7 +39,7 @@ const getPrice = async () => {
 const getProduct = async () => {
   return new Promise(function (resolve, reject) {
     const products = stripe.products.list({
-      limit: 10,
+      limit: 100,
     });
     resolve(products);
   })
@@ -55,7 +50,6 @@ const endpointSecret = "whsec_4d9d5aa5c272302bf5f15227b8ed33bc1b8b0395ca62c0ace5
 
 app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
   const sig = request.headers['stripe-signature'];
-
   let event;
 
   try {
@@ -69,14 +63,28 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
   switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntentSucceeded = event.data.object;
+      // Then define and call a function to handle the event payment_intent.succeeded
+      console.log("PAYMENT INTENT SUCCEEDED");
       console.log(paymentIntentSucceeded);
-      console.log(paymentIntentSucceeded.charges.data)
+
       break;
     // ... handle other event types
+    case 'checkout.session.completed':
+      const checkoutSessionCompleted = event.data.object;
+      console.log("CHECKOUT SESSION");
+      console.log(checkoutSessionCompleted);
+      stripe.checkout.sessions.listLineItems(
+        checkoutSessionCompleted.id,
+        function(err, lineItems) {
+          console.log(lineItems);
+        }
+      )
+    
+      break;
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
-
-  // Return a 200 response to acknowledge receipt of the event
-  response.send();
 });
+
+app.use(bodyParser.json());
+
