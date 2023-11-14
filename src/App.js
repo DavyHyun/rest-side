@@ -5,10 +5,11 @@ import Cleared from "./pages/Cleared/Cleared";
 import History from "./pages/History/History";
 import Products from "./pages/Products/Products";
 import Settings from "./pages/Settings/Settings";
+import Login from "./pages/Login/Login";
+import React, {useEffect, useState} from "react";
 
 
 function App() {
-
 
     return (
         <Layout>
@@ -18,7 +19,9 @@ function App() {
                 <Route path="/history" exact element={<History />} />
                 <Route path="/products" exact element={<Products />} />
                 <Route path="/settings" exact element={<Settings />} />
+                <Route path="/login" exact element={<Login />} />
             </Routes>
+
         </Layout>
     );
 }

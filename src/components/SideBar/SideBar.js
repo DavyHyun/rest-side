@@ -8,12 +8,23 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link } from 'react-router-dom';
+import { signOut } from "firebase/auth";
+import {auth} from '../../firebase'
 
 function SideBar() {
 
     const RESTNAME = "COMMUNITY GROCERY & TERIYAKI";
 
+    const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        console.log('signed out')
+      } catch (error) {
+        console.error('Logout error:', error.message);
+      }
+    }
   return (
     <Drawer sx={{
         width: 240,
@@ -62,6 +73,12 @@ function SideBar() {
           <SettingsOutlinedIcon />
         </ListItemIcon>
         Settings
+      </ListItem>
+      <ListItem button onClick={handleLogout}>
+        <ListItemIcon style={{color: '#B8293D'}}>
+          <LogoutOutlinedIcon />
+        </ListItemIcon>
+       Logout
       </ListItem>
     </List>
   </Drawer>
