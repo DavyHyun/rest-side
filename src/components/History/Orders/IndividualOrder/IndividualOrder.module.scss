@@ -1,0 +1,12 @@
+.orderContainer {
+  width: 100%;
+  display: flex;
+
+  .orderCategory {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+  }
+}

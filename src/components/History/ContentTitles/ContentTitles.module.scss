@@ -1,0 +1,17 @@
+.contentLabel {
+  width: 100%;
+  background-color: #D9D9D9;
+  border-radius: 5px;
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .contentTitle {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    width: 15%;
+    justify-content: center;
+  }
+}
