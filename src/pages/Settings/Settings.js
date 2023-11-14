@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { get, ref, onValue, update } from 'firebase/database';
-import database from '../../firebase'; 
+import {database} from '../../firebase'; 
 
 import classes from './Settings.module.scss';
 import isEqual from 'lodash/isEqual';

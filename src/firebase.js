@@ -3,8 +3,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-
-const { getDatabase } = require("firebase/database");
+import { getDatabase } from "firebase/database";
 
 
 
@@ -26,7 +25,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export default app;
 const database = getDatabase(app);
-
-export default database;
+export {database};
+export default app;
